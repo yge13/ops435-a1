@@ -1,0 +1,9 @@
+There are seven functions in the program.  
+The first function dbda() is to accept the argument, and decide which function to use for the next step. If the date is not correct, it will use valid_date() or usage() function. If it is correct, it will use after() or before() function to count the new date.
+The function after() is for days after the argument. If we use 2019/01/01 3, it will return three days after 2019/01/01. 
+The function before() is for days before the argument. If we use 2019/03/10 -2, it will return two days before 2019/03/10. 
+For these two function, if the year is leap year, February will have 29 days. Therefore, we need to divide three situations: the year / 4, the year / 100 and the year / 400. If it is the first or last day of one month, it will change the month as well when the day after or before one day. If it is 01/01 or 12/31, it will change the year, too.
+The function leap_year() is to judge the year is leap year or not. When the year / 4, the year / 100 and the year / 400, it will return true, and it means the date is belong to leap year.
+The function days_in_mon() is to count how many days in a month, such as 31 days in January, 30 days in April. If it is a leap year, the February will have 29 days.
+The function valid_date() is to judge the date format is correct or not. If the date is more than the day in one month, it will return ¡°wrong day entered¡±. If the month is more than 12, it will return ¡°wrong month entered¡±.
+The function usage() is to use when the argument is not correct. It will show the right format.
