@@ -1,0 +1,12 @@
+﻿[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/12/30 3
+2019/01/02
+[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/15/12 3
+wrong month entered
+[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/12/45 3
+wrong day entered
+[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/12/12 -4
+2018/12/08
+[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/12/12 2
+2018/12/14
+[yge13@c7-yge13 ops435]$ python3 a1_yge13.py 2018/12/45
+Usage: a1_yge13.py [--step] YYYY/MM/DD +/-n

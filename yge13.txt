@@ -1,0 +1,155 @@
+﻿#OPS435 Assignment 1 - Fall 2019
+#Program: a1_yge13.py 
+#Author: "Yun Ge"
+#The python code in this file (a1_yge13.py) is original work written by "Yun Ge". No code in this file is copied from any other source except those provided by the course instructor, including any person, textbook, or on-line resource. I have not shared this python script with anyone or anything except for submission for grading. I understand that the Academic Honesty Policy will be enforced and violators will be reported and appropriate action will be taken.
+
+
+import sys  
+def dbda(today,num):
+    isRightDate = valid_date(today)
+    if isRightDate:
+       num = int(num)
+       after(today)
+
+def after(today):
+    if len(today) != 10:
+       return '0000/00/00'
+    else:
+       str_year, str_month, str_day = today.split('/')
+       year = int(str_year)
+       month = int(str_month)
+       day = int(str_day)
+
+       lyear = year % 4
+       if lyear == 0:
+          feb_max = 29
+       else:
+          feb_max = 28
+
+       lyear = year % 100
+       if lyear == 0:
+          feb_max = 28
+
+       lyear = year % 400
+       if lyear == 0:
+          feb_max = 29
+
+       tmp_day = day + 1 # next day
+
+       mon_max = { 1:31, 2:feb_max, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+       tmp_day = day + num
+       if tmp_day > mon_max[month]:
+          to_day = tmp_day % mon_max[month]
+          tmp_month = month + 1
+       else:
+          to_day = tmp_day
+          tmp_month = month + 0
+
+       if tmp_month > 12:
+           to_month = 1
+           year = year + 1
+       else:
+           to_month = tmp_month + 0
+
+       next_date = str(year)+"/"+str(to_month).zfill(2)+"/"+str(to_day).zfill(2)
+       print(next_date)
+       return next_date
+
+def before(today):
+    if len(today) != 10:
+       return '0000/00/00'
+    else:
+       str_year, str_month, str_day = today.split('/')
+       year = int(str_year)
+       month = int(str_month)
+       day = int(str_day)
+
+       lyear = year % 4
+       if lyear == 0:
+          feb_max = 29
+       else:
+          feb_max = 28
+
+       lyear = year % 100
+       if lyear == 0:
+          feb_max = 28
+
+       lyear = year % 400
+       if lyear == 0:
+          feb_max = 29
+
+       tmp_day = day - 1 
+       mon_max = { 1:31, 2:feb_max, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+       tmp_day = day +num
+       if tmp_day <= 0:
+          to_month = month - 1
+          if to_month == 0:
+            year = year -1
+            to_month == 12
+            to_day = mon_max[to_month]-(abs(num)-1)
+          else:
+            to_day = mon_max[to_month]
+       else:
+          to_month = month
+          to_day = tmp_day
+
+       before_date = str(year)+"/"+str(to_month).zfill(2)+"/"+str(to_day).zfill(2)
+       print(before_date)
+       return before_date
+
+def leap_year(year):
+  year = int(year)
+  if year % 100 == 0:
+    if year % 400 == 0:
+        # print('%d is leap year' %year)
+        return True
+    else:
+        # print('%d is not leap year' %year)
+        return False
+  else:
+    if year % 4 == 0:
+        # print('%d is leap year' %year)
+        return True
+    else:
+        # print('%d  is not leap year' %year)
+        return False
+
+def days_in_mon(year):
+    isLeapYear = leap_year(year)
+    if isLeapYear:
+      mon_max = { 1:31, 2:29, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+      return mon_max
+    else:
+      mon_max = { 1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+      return mon_max
+
+def valid_date(today):
+    if len(today) != 10:
+       return '0000/00/00'
+    else:
+       str_year, str_month, str_day = today.split('/')
+       year = int(str_year)
+       month = int(str_month)
+       day = int(str_day)
+       mon_max = days_in_mon(year)
+       if month in mon_max.keys():
+         if day <=0 or day>mon_max[month]:
+           print('wrong day entered')
+           return False
+         else:
+           return True
+       else:
+           print('wrong month entered')
+           return False
+
+def usage():
+   print('Usage: a1_yge13.py [--step] YYYY/MM/DD +/-n')
+
+if __name__ == "__main__":
+   length = len(sys.argv)
+   if length != 3:
+      usage()
+   else:
+      today = sys.argv[1]
+      num = int(sys.argv[2])
+      dbda(today,num)
